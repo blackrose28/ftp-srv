@@ -31,16 +31,16 @@ class Passive extends Connector {
     return this.server.getNextPasvPort()
     .then((port) => {
       const connectionHandler = (socket) => {
-        if (!ip.isEqual(this.connection.commandSocket.remoteAddress, socket.remoteAddress)) {
-          this.log.error({
-            pasv_connection: socket.remoteAddress,
-            cmd_connection: this.connection.commandSocket.remoteAddress
-          }, 'Connecting addresses do not match');
+        // if (!ip.isEqual(this.connection.commandSocket.remoteAddress, socket.remoteAddress)) {
+        //   this.log.error({
+        //     pasv_connection: socket.remoteAddress,
+        //     cmd_connection: this.connection.commandSocket.remoteAddress
+        //   }, 'Connecting addresses do not match');
 
-          socket.destroy();
-          return this.connection.reply(550, 'Remote addresses do not match')
-          .finally(() => this.connection.close());
-        }
+        //   socket.destroy();
+        //   return this.connection.reply(550, 'Remote addresses do not match')
+        //   .finally(() => this.connection.close());
+        // }
         this.log.trace({port, remoteAddress: socket.remoteAddress}, 'Passive connection fulfilled.');
 
         this.dataSocket = socket;
